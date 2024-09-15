@@ -17,7 +17,7 @@ const cookieParser = require('cookie-parser');
 
 
 app.use(bodyParser.json());
-const allowedOrigins = ['http://localhost:5173','https://inkspace-blogapp-frontend.onrender.com']; // Add more origins as needed
+const allowedOrigins = ['http://localhost:5173','https://inkspace-blogapp.onrender.com/']; // Add more origins as needed
 
 // Configure CORS with credentials
 app.use(
