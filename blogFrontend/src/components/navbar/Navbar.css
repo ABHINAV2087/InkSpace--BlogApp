@@ -1,0 +1,105 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    border-radius: 40px;
+    position: relative; /* Add relative positioning */
+}
+
+.navbar-left, .navbar-middle, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left .nav-link {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.navbar-left .nav-link span {
+    font-size: 0.8rem;
+}
+
+.navbar-left .nav-link:hover {
+    color: #f39c12;
+}
+
+.icon {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.logo:hover {
+    color: #f39c12;
+}
+
+.navbar-right {
+    position: absolute; /* Absolute positioning to center the content */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact centering */
+}
+
+.navbar-right a {
+    text-decoration: none;
+    color: white;
+    margin-left: 20px; /* Adjust spacing between links */
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.navbar-right .active {
+    color: #f39c12; /* Highlight color for the active link */
+}
+
+.navbar-right a:hover {
+    color: #f39c12;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-middle {
+        margin: 10px 0;
+    }
+
+    .navbar-left .nav-link {
+        margin-right: 10px;
+    }
+
+    .navbar-right {
+        position: static; /* Reset position for mobile view */
+        margin: 10px 0; /* Adjust margin for mobile */
+        width: 100%; /* Ensure full width on mobile */
+        justify-content: center; /* Center items in mobile view */
+        flex-wrap: wrap; /* Allow wrapping of links if needed */
+    }
+
+    .navbar-right a {
+        margin-left: 10px; /* Adjust spacing on mobile */
+        font-size: 0.9em; /* Slightly smaller font size on mobile */
+    }
+}

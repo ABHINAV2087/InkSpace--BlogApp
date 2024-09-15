@@ -1,0 +1,51 @@
+.authout{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: transparent; /* var(--col2) replaced with #f4a261 */
+    height:fit-content;
+    justify-content: center;
+  }
+  
+.authin{
+    display: flex;
+    width: 70%;
+    background-color: white;
+    align-self: center;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.authin .left{
+    width: 40%;
+    
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    
+}
+.authin .left img{
+    height: 90%;
+}
+  
+.authin .right{
+    width: 60%;
+    padding: 10px;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+  
+.authlink{
+    align-self: center;
+    margin: 10px 0px;
+    color: #264653; /* var(--col3) replaced with #264653 */
+}
+  
+.authlink a{
+    color: #e76f51; /* var(--col1) replaced with #e76f51 */
+    font-size: 20px;
+    font-weight: 500;
+}
+
