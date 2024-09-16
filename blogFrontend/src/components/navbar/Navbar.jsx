@@ -109,7 +109,7 @@ function Navbar() {
 
             <div className='navbar-middle'>
                 <Link to="/" className='logo'>
-                    <img src="src/Assests/logo.png" className="logo-img" alt="InkSpace" style={{ height: "50px", width: "100px" }} />
+                    <img src="/src/Assests/logo.png" className="logo-img" alt="InkSpace" style={{ height: "50px", width: "100px" }} />
                 </Link>
             </div>
         </nav>

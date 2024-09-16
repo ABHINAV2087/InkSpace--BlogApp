@@ -25,7 +25,7 @@ function SignIn() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         const validationErrors = {};
         if (!formData.email) {
             validationErrors.email = 'Email is required';
@@ -33,12 +33,12 @@ function SignIn() {
         if (!formData.password) {
             validationErrors.password = 'Password is required';
         }
-    
+
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
-    
+
         fetch(`${import.meta.env.VITE_BACKEND_API}/auth/login`, {
             method: 'POST',
             headers: {
@@ -55,8 +55,7 @@ function SignIn() {
                         position: 'top-right',
                         autoClose: 2000
                     });
-                    // Redirect immediately after a successful login
-                    window.location.href = "/";
+                    checkLogin();
                 } else {
                     toast(response.message, {
                         type: 'error',
@@ -73,7 +72,6 @@ function SignIn() {
                 });
             });
     };
-    
 
     const checkLogin = async () => {
         fetch(`${import.meta.env.VITE_BACKEND_API}/auth/checklogin`, {
