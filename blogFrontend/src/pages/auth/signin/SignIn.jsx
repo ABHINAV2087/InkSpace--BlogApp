@@ -6,6 +6,8 @@ import "../../../index.css"
 import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 
+import img from "../../../Assests/signup-boy.jpg"
+
 
 function SignIn() {
 
@@ -97,7 +99,7 @@ function SignIn() {
             
             <div className='authin'>
             <div className="left">
-            <img src="src\Assests\signup-boy.jpg"  />
+            <img src={img}  />
                 </div>
                 <div className='right'>
                     <form
