@@ -76,23 +76,33 @@ function SignIn() {
     };
 
     const checkLogin = async () => {
-        fetch(`${import.meta.env.VITE_BACKEND_API}/auth/checklogin`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include'
-        })
-            .then((res) => res.json())
-            .then((response) => {
-                if (response.ok) {
-                    window.location.href = "/";
-                }
-            })
-            .catch((error) => {
-                window.location.href = "/";
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/auth/checklogin`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
             });
+    
+            if (response.ok) {
+                const data = await response.json();
+                // Assuming 'data.ok' is a field in your response
+                if (data.ok) {
+                    window.location.href = "/";
+                } else {
+                    // Handle case where login check fails
+                    window.location.href = "/login";  // Example redirect if not logged in
+                }
+            } else {
+                throw new Error('Failed to fetch');
+            }
+        } catch (error) {
+            console.error('Error checking login:', error);
+            window.location.href = "/login";  // Redirect to login on error
+        }
     };
+    
     
   return (
     <div className='authout'>
