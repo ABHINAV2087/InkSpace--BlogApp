@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import {deleteCookie } from 'cookies-next';
-
+import logo from "../../Assests/logo.png";
 function Navbar() {
     const [auth, setAuth] = useState(false);
 
@@ -109,7 +109,7 @@ function Navbar() {
 
             <div className='navbar-middle'>
                 <Link to="/" className='logo'>
-                    <img src="/src/Assests/logo.png" className="logo-img" alt="InkSpace" style={{ height: "50px", width: "100px" }} />
+                    <img src={logo} className="logo-img" alt="InkSpace" style={{ height: "50px", width: "100px" }} />
                 </Link>
             </div>
         </nav>
