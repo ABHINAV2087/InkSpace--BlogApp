@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />}/>
       <Route path="/addblog" element={<AddBlog />}/>
       <Route path="/register" element={<Signup />}/>
-      <Route path="/login" element={<SignIn />}/>
+      <Route path= {`${import.meta.env.VITE_BACKEND_API}/signin `} element={<SignIn />}/>
       <Route path="/pages/blogpage/{:id}" element={<Blogpage />}/>
       
       
