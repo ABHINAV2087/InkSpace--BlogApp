@@ -11,36 +11,37 @@ import { getCookie, setCookie } from 'cookies-next';
 function AddBlog() {
   let [loading, setLoading] = useState(false);
   const checkLogin = async () => {
-
-    fetch(`${import.meta.env.VITE_BACKEND_API}/auth/checklogin`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include'
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((response) => {
-        console.log(response)
-
-
-
-        if (response.ok) {
-          window.location.href = "addblog"
-
+    try {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/auth/checklogin`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
+      // Check if the response is OK (status code 200-299)
+      if (res.ok) {
+        const response = await res.json();
+        console.log(response);
+  
+        // Redirect based on some condition in the response data
+        if (response.success) {
+          window.location.href = "/addblog";
         } else {
-
-          window.location.href = "/signin"
-
+          window.location.href = "/signin";
         }
-      })
-      .catch((error) => {
-        window.location.href = "/signin"
-
-      })
+      } else {
+        // If response is not OK, redirect to signin
+        window.location.href = "/signin";
+      }
+    } catch (error) {
+      // Log the error and redirect to signin
+      console.error("Error:", error);
+      window.location.href = "/signin";
+    }
   };
+  
 
   useEffect(() => {
     checkLogin();
