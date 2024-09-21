@@ -26,6 +26,7 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+  
 router.get('/test', async (req, res) => {
     res.json({
         message: "user api is working"
@@ -86,7 +87,7 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ email });
 
         if (!user) {
             return res.status(400).json(createResponse(false, 'Invalid credentials'));
@@ -98,19 +99,29 @@ router.post('/login', async (req, res, next) => {
         }
 
         const authToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '10m' });
-        const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_KEY, { expiresIn: '1d' })
+        const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_KEY, { expiresIn: '1d' });
 
-        res.cookie('authToken', authToken, { httpsOnly: true });
-        res.cookie('refreshToken', refreshToken, { httpOnly: true });
+        res.cookie('authToken', authToken, { 
+            httpOnly: true, 
+            secure: true, // Only send cookies over HTTPS
+            sameSite: 'None'  // Required for cross-origin cookies
+        });
+        res.cookie('refreshToken', refreshToken, { 
+            httpOnly: true, 
+            secure: true, 
+            sameSite: 'None' 
+        });
+
         res.status(200).json(createResponse(true, 'Login successful', {
             authToken,
             refreshToken
         }));
 
     } catch (err) {
-        next(err)
+        next(err);
     }
-})
+});
+
 
 router.get('/checklogin', authTokenHandler, async (req, res) => {
     res.json({
