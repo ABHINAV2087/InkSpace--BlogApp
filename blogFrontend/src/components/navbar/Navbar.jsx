@@ -5,6 +5,7 @@ import { FaSearch, FaUser } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import {deleteCookie } from 'cookies-next';
 import logo from "../../Assests/logo.png";
+import { toast } from 'react-toastify';
 function Navbar() {
     const [auth, setAuth] = useState(false);
 
@@ -38,7 +39,7 @@ function Navbar() {
                 // });
                 setAuth(false)
             }
-        }).catch(( err) => {
+        }).catch(( error) => {
             toast(error.message, {
                 type: 'error',
                 position: 'top-right',
