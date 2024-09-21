@@ -28,9 +28,7 @@ function AddBlog() {
         // Redirect based on some condition in the response data
         if (response.success) {
           window.location.href = "/addblog";
-        } else {
-          window.location.href = "/signin";
-        }
+        } 
       } else {
         // If response is not OK, redirect to signin
         window.location.href = "/signin";
