@@ -133,7 +133,11 @@ router.get('/checklogin', authTokenHandler, async (req, res) => {
 
 router.get('/logout', (req, res) => {
     // Clear session or tokens
-    res.json({ ok: true, message: 'Logged out successfully' });
+    res.clearCookie('authToken');
+    res.clearCookie('refreshToken');
+    req.session.destroy(); // If using sessions
+
+    return res.status(200).json({ message: 'Logged out successfully', ok: true });
 });
 
 
