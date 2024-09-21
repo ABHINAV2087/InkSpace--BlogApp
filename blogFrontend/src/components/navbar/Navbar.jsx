@@ -51,11 +51,16 @@ function Navbar() {
         checkLogin(); // Call the checkLogin function on route change
     }, []);
 
-    const handlelogout = async () => {
-        await deleteCookie('authToken');
-        await deleteCookie('refreshToken');
-        window.location.href = "/signin"
-    }
+    const handleLogout = async () => {
+        try {
+            await deleteCookie('authToken');
+            await deleteCookie('refreshToken');
+            window.location.href = "/signin";
+        } catch (error) {
+            console.error("Logout error:", error);
+        }
+    };
+    
 
     return (
         <nav className='navbar'>
