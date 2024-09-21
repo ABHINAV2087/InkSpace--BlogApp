@@ -83,12 +83,18 @@ function Navbar() {
             }
         } catch (error) {
             console.error("Logout error:", error);
-            toast(error.message, {
+        
+            // Check if error.message exists, otherwise provide a default message
+            const errorMessage = error?.message || 'An unexpected error occurred during logout.';
+        
+            // Show the error message in the toast notification
+            toast(errorMessage, {
                 type: 'error',
                 position: 'top-right',
                 autoClose: 2000
             });
         }
+        
     };
     
     
