@@ -55,11 +55,13 @@ function Navbar() {
         try {
             await deleteCookie('authToken');
             await deleteCookie('refreshToken');
+            setAuth(false);  // Reset the auth state
             window.location.href = "/signin";
         } catch (error) {
             console.error("Logout error:", error);
         }
     };
+    
     
 
     return (
@@ -92,7 +94,7 @@ function Navbar() {
                         <NavLink to="/contact" className={({ isActive }) => (isActive ? "active" : "")}>
                             Contact
                         </NavLink>
-                        <button onClick={handlelogout} style={{marginLeft:"20px"}}>
+                        <button onClick={handleLogout} style={{marginLeft:"20px"}}>
                             Logout
                         </button>
                     </div>
