@@ -55,15 +55,42 @@ function Navbar() {
     const handleLogout = async () => {
         console.log("Attempting to log out...");
         try {
-            await deleteCookie('authToken', { path: '/' });
-            await deleteCookie('refreshToken', { path: '/' });
-            console.log("Cookies deleted");
-            setAuth(false);
-            window.location.href = "/signin";
+            // First, make a request to the backend to log out and clear the session
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/auth/logout`, {
+                method: 'GET',
+                credentials: 'include', // This ensures cookies are sent with the request
+            });
+    
+            const data = await response.json();
+            
+            if (response.ok) {
+                console.log("Logout successful on server");
+    
+                // If logout is successful, delete cookies client-side
+                await deleteCookie('authToken', { path: '/' });
+                await deleteCookie('refreshToken', { path: '/' });
+    
+                console.log("Cookies deleted");
+                setAuth(false);  // Reset auth state
+                window.location.href = "/signin"; // Redirect to signin page
+            } else {
+                console.error("Logout failed on server:", data.message);
+                toast(data.message, {
+                    type: 'error',
+                    position: 'top-right',
+                    autoClose: 2000
+                });
+            }
         } catch (error) {
             console.error("Logout error:", error);
+            toast(error.message, {
+                type: 'error',
+                position: 'top-right',
+                autoClose: 2000
+            });
         }
     };
+    
     
     
     
