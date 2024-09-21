@@ -92,14 +92,14 @@ function SignIn() {
                     window.location.href = "/";
                 } else {
                     // Handle case where login check fails
-                    window.location.href = "/login";  // Example redirect if not logged in
+                    window.location.href = "/signin";  // Example redirect if not logged in
                 }
             } else {
                 throw new Error('Failed to fetch');
             }
         } catch (error) {
             console.error('Error checking login:', error);
-            window.location.href = "/login";  // Redirect to login on error
+            window.location.href = "/signin";  // Redirect to login on error
         }
     };
     
