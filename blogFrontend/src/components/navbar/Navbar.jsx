@@ -10,44 +10,41 @@ function Navbar() {
     const [auth, setAuth] = useState(false);
 
     const checkLogin = async () => {
-        fetch(`${import.meta.env.VITE_BACKEND_API}/auth/checklogin`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include'
-        })
-        .then((res) => {
-            return res.json();
-        })
-        .then((response) => {
-            if (response.ok) {
-                // toast(response.message, {
-                //     type: 'success',
-                //     position: 'top-right',
-                //     autoClose: 2000
-                // })
-
-                // window.location.href = "/auth/signin"
-                setAuth(true)
-
-            } else {
-                // toast(response.message, {
-                //     type: 'error',
-                //     position: 'top-right',
-                //     autoClose: 2000
-                // });
-                setAuth(false)
+        try {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_API}/auth/checklogin`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+    
+            // Check if the response is OK (status 200-299)
+            if (!res.ok) {
+                throw new Error(`Server error: ${res.status} ${res.statusText}`);
             }
-        }).catch(( error) => {
-            toast(error.message, {
+    
+            // Parse the response if it's JSON
+            const response = await res.json();
+    
+            if (response.ok) {
+                setAuth(true);
+            } else {
+                setAuth(false);
+            }
+        } catch (error) {
+            console.error("Error during login check:", error);
+    
+            // Display error using toast
+            const errorMessage = error.message || 'An unexpected error occurred during login check.';
+            toast(errorMessage, {
                 type: 'error',
                 position: 'top-right',
-                autoClose: 2000
+                autoClose: 2000,
             });
-        })
-    }
-
+        }
+    };
+    
     useEffect(() => {
         checkLogin(); // Call the checkLogin function on route change
     }, []);
