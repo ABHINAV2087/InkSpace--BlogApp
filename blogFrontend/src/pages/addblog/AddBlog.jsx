@@ -28,7 +28,7 @@ function AddBlog() {
 
 
         if (response.ok) {
-          window.location.href = "/signin"
+          window.location.href = "/addblog"
 
         } else {
 
