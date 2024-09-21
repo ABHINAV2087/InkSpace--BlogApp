@@ -130,6 +130,14 @@ router.get('/checklogin', authTokenHandler, async (req, res) => {
     })
 })
 
+
+app.get('/logout', (req, res) => {
+    // Clear session or tokens
+    res.json({ ok: true, message: 'Logged out successfully' });
+});
+
+
+
 router.use(errHandler)
 
 module.exports = router;

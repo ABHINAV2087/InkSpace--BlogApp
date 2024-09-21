@@ -53,15 +53,18 @@ function Navbar() {
     }, []);
 
     const handleLogout = async () => {
+        console.log("Attempting to log out...");
         try {
-            await deleteCookie('authToken');
-            await deleteCookie('refreshToken');
-            setAuth(false);  // Reset the auth state
+            await deleteCookie('authToken', { path: '/' });
+            await deleteCookie('refreshToken', { path: '/' });
+            console.log("Cookies deleted");
+            setAuth(false);
             window.location.href = "/signin";
         } catch (error) {
             console.error("Logout error:", error);
         }
     };
+    
     
     
 
