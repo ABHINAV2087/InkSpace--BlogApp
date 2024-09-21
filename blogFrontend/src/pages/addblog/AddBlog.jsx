@@ -28,7 +28,7 @@ function AddBlog() {
 
 
         if (response.ok) {
-          window.location.href = "/"
+          window.location.href = "addblog"
 
         } else {
 
